@@ -1,0 +1,15 @@
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\bin\Debug\net10.0\HttpServerHomework.exe
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\bin\Debug\net10.0\HttpServerHomework.deps.json
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\bin\Debug\net10.0\HttpServerHomework.runtimeconfig.json
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\bin\Debug\net10.0\HttpServerHomework.dll
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\bin\Debug\net10.0\HttpServerHomework.pdb
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\obj\Debug\net10.0\HttpServerHomework.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\obj\Debug\net10.0\HttpServerHomework.AssemblyInfoInputs.cache
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\obj\Debug\net10.0\HttpServerHomework.AssemblyInfo.cs
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\obj\Debug\net10.0\HttpServerHomework.csproj.CoreCompileInputs.cache
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\obj\Debug\net10.0\HttpServerHomework.dll
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\obj\Debug\net10.0\refint\HttpServerHomework.dll
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\obj\Debug\net10.0\HttpServerHomework.pdb
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\obj\Debug\net10.0\HttpServerHomework.genruntimeconfig.cache
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\obj\Debug\net10.0\ref\HttpServerHomework.dll
+C:\Users\user\RiderProjects\HttpServerHomework\HttpServerHomework\bin\Debug\net10.0\settings.json

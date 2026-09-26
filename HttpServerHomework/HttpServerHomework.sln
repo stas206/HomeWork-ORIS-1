@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpServerHomework", "HttpServerHomework\HttpServerHomework.csproj", "{F51F2DC6-43CA-46D5-9750-149AF4C5BD45}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F51F2DC6-43CA-46D5-9750-149AF4C5BD45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F51F2DC6-43CA-46D5-9750-149AF4C5BD45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F51F2DC6-43CA-46D5-9750-149AF4C5BD45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F51F2DC6-43CA-46D5-9750-149AF4C5BD45}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
