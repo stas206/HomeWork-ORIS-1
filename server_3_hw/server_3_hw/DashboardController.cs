@@ -13,7 +13,6 @@ internal class DashboardController
         _htmlFolder = htmlFolder;
     }
 
-    // GET: Dashboard/profile?userId=1
     [Get("profile")]
     public string GetProfile(int userId)
     {
@@ -29,7 +28,6 @@ internal class DashboardController
         return "<h1>404 - Profile not found</h1>";
     }
 
-    // GET: Dashboard/activities?userId=5
     [Get("activities")]
     public string GetActivities(int userId)
     {

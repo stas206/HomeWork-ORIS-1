@@ -21,7 +21,6 @@ public class HttpServer
     private readonly string _htmlFolder;
     private Router _router;
 
-    // Маппинг: имя сайта → имя главного файла
     private readonly Dictionary<string, string> _defaultFiles = new()
     {
         { "bonx", "index.html" },
@@ -43,11 +42,10 @@ public class HttpServer
 
     public void Start()
     {
-        // Загружаем MIME-типы
         if (File.Exists("types.json"))
         {
             string typesJson = File.ReadAllText("types.json");
-            _mimeTypes = JsonSerializer.Deserialize<Dictionary<string, string>>(typesJson) 
+            _mimeTypes = JsonSerializer.Deserialize<Dictionary<string, string>>(typesJson)
                          ?? new Dictionary<string, string>();
         }
         else
@@ -55,7 +53,6 @@ public class HttpServer
             _mimeTypes = new Dictionary<string, string>();
         }
 
-        // Регистрируем контроллеры
         if (_settings.Controllers.Enabled)
         {
             _router.RegisterControllers(_htmlFolder);
@@ -63,8 +60,7 @@ public class HttpServer
 
         _server.Start();
         _isListening = true;
-        Console.WriteLine($"✅ Сервер запущен: http://{_settings.Server.Host}:{_settings.Server.Port}/");
-        Console.WriteLine($"   Доступные сайты: {string.Join(", ", _settings.AllowedSites)}");
+        Console.WriteLine($"Сервер запущен: http://{_settings.Server.Host}:{_settings.Server.Port}/");
 
         Listen();
     }
@@ -99,7 +95,6 @@ public class HttpServer
 
                 string firstPart = parts[0];
 
-                // Проверяем, это запрос к контроллеру?
                 if (_settings.Controllers.Enabled && IsControllerRequest(firstPart))
                 {
                     await HandleControllerRequest(context, parts);
@@ -111,7 +106,6 @@ public class HttpServer
             }
             catch (HttpListenerException)
             {
-                // Ожидаемое исключение при остановке сервера
             }
         }
     }
@@ -133,7 +127,6 @@ public class HttpServer
         if (route == null)
         {
             await Send404(response, $"Метод '{actionPath}' не найден в контроллере '{controllerName}'");
-            Console.WriteLine($"404: /{controllerName}/{actionPath}");
             return;
         }
 
@@ -145,54 +138,53 @@ public class HttpServer
             byte[] controllerBuffer = Encoding.UTF8.GetBytes(result);
             response.ContentLength64 = controllerBuffer.Length;
             await response.OutputStream.WriteAsync(controllerBuffer);
-            Console.WriteLine($"200: /{controllerName}/{actionPath}");
         }
         catch (Exception ex)
         {
             response.StatusCode = 500;
             response.ContentType = "text/html; charset=utf-8";
-            string html = $"<h1>500 - Internal Server Error</h1><p>{ex.Message}</p>";
+            string html = $"<h1>500</h1><p>{ex.Message}</p>";
             byte[] errorBuffer = Encoding.UTF8.GetBytes(html);
             response.ContentLength64 = errorBuffer.Length;
             await response.OutputStream.WriteAsync(errorBuffer);
-            Console.WriteLine($"500: {ex.Message}");
         }
     }
 
     private async Task HandleStaticFileRequest(HttpListenerContext context, string[] parts)
     {
+        var request = context.Request;
         var response = context.Response;
         string siteName = parts[0];
         string fileInsideSite = parts.Length > 1 ? string.Join("/", parts.Skip(1)) : "";
 
-        // Проверяем, есть ли такой сайт в списке разрешённых
         if (string.IsNullOrEmpty(siteName) || !_settings.AllowedSites.Contains(siteName))
         {
-            await Send404(response, $"Сайт '{siteName}' не найден. Доступны: {string.Join(", ", _settings.AllowedSites)}");
-            Console.WriteLine($"404: сайт '{siteName}' не найден");
+            await Send404(response, $"Сайт '{siteName}' не найден");
             return;
         }
 
-        // Если файл не указан — подставляем главный файл для этого сайта
-        if (string.IsNullOrEmpty(fileInsideSite))
+        if (IsMethodWithBody(request.HttpMethod) && request.HasEntityBody)
         {
-            if (_defaultFiles.TryGetValue(siteName, out string defaultFile))
-            {
-                fileInsideSite = defaultFile;
-            }
-            else
-            {
-                fileInsideSite = "index.html";
-            }
+            string rawBody = await ReadRawBody(request);
+            Dictionary<string, string> formData = ParseFormData(rawBody);
+
+            string login = formData.TryGetValue("login", out string l) ? l : "";
+            string password = formData.TryGetValue("password", out string p) ? p : "";
+
+            Console.WriteLine($"login = {login}");
+            Console.WriteLine($"password = {password}");
         }
 
-        // Формируем полный путь: sites/имя_сайта/файл
-        string filePath = Path.Combine(_sitesFolder, siteName, fileInsideSite);
+        if (string.IsNullOrEmpty(fileInsideSite))
+        {
+            fileInsideSite = _defaultFiles.TryGetValue(siteName, out string df) ? df : "index.html";
+        }
 
+        string filePath = Path.Combine(_sitesFolder, siteName, fileInsideSite);
         FileInfo fileInfo = new FileInfo(filePath);
+
         if (!fileInfo.Exists)
         {
-            // Файл не найден — отдаём общую 404.html из папки sites
             response.StatusCode = 404;
             string errorPath = Path.Combine(_sitesFolder, "404.html");
 
@@ -208,7 +200,7 @@ public class HttpServer
             else
             {
                 response.ContentType = "text/html; charset=utf-8";
-                string html = $"<h1>404</h1><p>Файл '{fileInsideSite}' не найден на сайте '{siteName}'</p>";
+                string html = $"<h1>404</h1><p>Файл не найден</p>";
                 byte[] errorBuffer = Encoding.UTF8.GetBytes(html);
                 response.ContentLength64 = errorBuffer.Length;
                 await using Stream errorOutput = response.OutputStream;
@@ -216,19 +208,66 @@ public class HttpServer
                 await errorOutput.FlushAsync();
             }
 
-            Console.WriteLine($"404: файл '{fileInsideSite}' не найден на сайте '{siteName}'");
             return;
         }
 
-        // Файл найден — отдаём его
         response.ContentType = GetContentType(fileInfo.Extension);
         byte[] fileBuffer = await File.ReadAllBytesAsync(filePath);
         response.ContentLength64 = fileBuffer.Length;
         await using Stream fileOutput = response.OutputStream;
         await fileOutput.WriteAsync(fileBuffer);
         await fileOutput.FlushAsync();
+    }
 
-        Console.WriteLine($"200: {siteName}/{fileInsideSite}");
+    private bool IsMethodWithBody(string method)
+    {
+        return method.Equals("POST", StringComparison.OrdinalIgnoreCase)
+            || method.Equals("PUT", StringComparison.OrdinalIgnoreCase)
+            || method.Equals("PATCH", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private async Task<string> ReadRawBody(HttpListenerRequest request)
+    {
+        using var reader = new StreamReader(request.InputStream, Encoding.UTF8);
+        return await reader.ReadToEndAsync();
+    }
+
+    private Dictionary<string, string> ParseFormData(string body)
+    {
+        var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        if (string.IsNullOrWhiteSpace(body)) return result;
+
+        foreach (var pair in body.Split('&'))
+        {
+            if (string.IsNullOrEmpty(pair)) continue;
+            var kv = pair.Split('=', 2);
+            string key = DecodeFormValue(kv[0]);
+            string value = kv.Length > 1 ? DecodeFormValue(kv[1]) : "";
+            result[key] = value;
+        }
+        return result;
+    }
+
+    private string DecodeFormValue(string s)
+    {
+        return Uri.UnescapeDataString(s.Replace('+', ' '));
+    }
+
+    private Dictionary<string, string> ParseQueryString(string query)
+    {
+        var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        if (string.IsNullOrEmpty(query)) return result;
+
+        query = query.TrimStart('?');
+        foreach (var pair in query.Split('&'))
+        {
+            if (string.IsNullOrEmpty(pair)) continue;
+            var kv = pair.Split('=', 2);
+            string key = DecodeFormValue(kv[0]);
+            string value = kv.Length > 1 ? DecodeFormValue(kv[1]) : "";
+            result[key] = value;
+        }
+        return result;
     }
 
     private async Task Send404(HttpListenerResponse response, string message)
@@ -256,28 +295,10 @@ public class HttpServer
         }
     }
 
-    private Dictionary<string, string> ParseQueryString(string query)
-    {
-        var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        if (string.IsNullOrEmpty(query)) return result;
-
-        query = query.TrimStart('?');
-        var pairs = query.Split('&');
-        foreach (var pair in pairs)
-        {
-            var keyValue = pair.Split('=');
-            if (keyValue.Length == 2)
-            {
-                result[keyValue[0]] = Uri.UnescapeDataString(keyValue[1]);
-            }
-        }
-        return result;
-    }
-
     public void Stop()
     {
         _isListening = false;
         _server.Stop();
-        Console.WriteLine(" Сервер выключен");
+        Console.WriteLine("Сервер выключен");
     }
 }

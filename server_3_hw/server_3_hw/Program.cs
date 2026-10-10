@@ -4,7 +4,6 @@ using System.Text.Json;
 using CustomHttpServer;
 using server_3_hw;
 
-// Читаем настройки из settings.json
 Settings settings = new Settings();
 if (File.Exists("settings.json"))
 {
@@ -12,18 +11,10 @@ if (File.Exists("settings.json"))
     var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
     settings = JsonSerializer.Deserialize<Settings>(settingsJson, options) ?? new Settings();
 }
-else
-{
-    Console.WriteLine("⚠️ Файл settings.json не найден! Используются настройки по умолчанию.");
-}
 
-// Создаём и запускаем сервер
 HttpServer server = new HttpServer(settings);
 server.Start();
 
-Console.WriteLine("Введите 'stop' для остановки сервера:");
-
-// Цикл чтения команд из консоли
 while (true)
 {
     string? command = Console.ReadLine();
@@ -33,5 +24,3 @@ while (true)
         break;
     }
 }
-
-Console.WriteLine("Программа завершена.");

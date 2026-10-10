@@ -59,7 +59,6 @@ public class Router
             }
             catch (Exception ex)
             {
-                // Игнорируем ошибки загрузки сборок
             }
         }
     }
