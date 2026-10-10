@@ -1,0 +1,8 @@
+﻿{
+  "Server": {
+    "Port": "8888",
+    "Host": "127.0.0.1",
+    "Path": ""
+  },
+  "AllowedSites": ["bonx", "satisfactory-wiki", "search", "steam"]
+}

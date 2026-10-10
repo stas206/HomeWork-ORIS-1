@@ -1,0 +1,438 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Войти</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* ИСПРАВЛЕНО: убрана кириллица в пути */
+            background-image: url("resources/new_login_bg_strong_mask.jpg");
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            font-family: "Motiva Sans", Sans-serif;
+        }
+
+        .login {
+            width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background: rgba(23, 26, 33, 0.95);
+            border-radius: 10px;
+            color: #969696;
+        }
+
+        .header {
+            width: 100%;
+            min-height: 100px;
+            background-color: #171d25;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 10px max(20px, calc((100% - 940px) / 2));
+            position: relative;
+            z-index: 10;
+            font-family: "Motiva Sans", sans-serif;
+            font-size: 16px;
+        }
+
+        .header img {
+            object-fit: contain;
+        }
+
+        .header__menu {
+            color: #969696;
+            position: absolute;
+            top: 10px;
+            right: 685px;
+            align-items: center;
+            gap: 10px;
+            font-size: 11px;
+            word-spacing: 8px;
+        }
+
+        .header__menu a {
+            color: #969696;
+            text-decoration: none;
+        }
+
+        .header__navigation {
+            color: #E9E9E9;
+
+            display: flex;
+            gap: 20px;
+            margin-left: 60px;
+        }
+
+        .header__navigation a {
+            color: #E9E9E9;
+            text-decoration: none;
+            word-spacing: -0.5px;
+        }
+
+        .downloand__button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 12px;
+
+            background: #5c7e10;
+            font-size: 11px;
+            word-spacing: -0.5px;
+
+            position: absolute;
+            top: 5px;
+            right: 790px;
+        }
+
+        .downloand__button a {
+            color: #e5e4dc;
+            text-decoration: none;
+        }
+
+        .header__left {
+            display: flex;
+            align-items: center;
+            gap: 0;
+
+            transform: translateX(-300px);
+        }
+
+        .login__card {
+            background-color: #171a21;
+            padding: 40px;
+            border-radius: 4px;
+            width: min(820px, calc(100% - 32px));
+            margin: 60px auto;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            position: relative;
+            color: #afafaf;
+        }
+
+        .login__card a {
+            color: #afafaf;
+        }
+
+        .login__selection {
+            margin-top: 130px;
+            margin-left: 890px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .login__card input[type="text"],
+        .login__card input[type="password"] {
+            display: block;
+            width: 500px;
+            padding: 10px;
+            margin: 5px 0px 20px;
+            background: #fff;
+            border: 1px solid #32353c;
+            border-radius: 1px;
+            color: #fff;
+            outline: none;
+        }
+
+        .login__card input:focus {
+            border-color: #66c0f4;
+        }
+
+        .login__card button {
+            padding: 15px 115px;
+            border: none;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #06bfff, #2d73ff);
+            color: white;
+            cursor: pointer;
+
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        @media (max-width: 650px) {
+            .login__card {
+                flex-direction: column;
+                padding: 24px;
+                gap: 30px;
+                margin: 30px auto;
+            }
+        }
+
+        .help-link {
+            position: absolute;
+            bottom: 20px;
+            left: 46%;
+            transform: translateX(-95%);
+            white-space: nowrap;
+            font-size: 12px;
+        }
+
+        .qr__box{
+            background-color: #ffffff;
+            padding: 6px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .qr__box img {
+            display: block;
+            width: 190px;
+            height: 190px;
+        }
+
+        .qr__text {
+            text-align: center;
+            max-width: 200px;
+            margin: 7px auto 0 auto;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .footer {
+            background-color:  #171a21;
+            padding: 80px 20px;
+            margin-top: 200px;
+        }
+
+        .footer__signup-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer__signup-banner h3 {
+            color: white;
+            font-weight: 900;
+        }
+
+        .footer__signup-banner button {
+            padding: 7px 20px;
+            border: none;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #06bfff, #2d73ff);
+            color: white;
+            cursor: pointer;
+
+            display: block;
+            margin: 12px auto;
+            text-align: center;
+        }
+
+        .footer__text {
+            text-align: center;
+
+            max-width: 380px;
+            margin: 0;
+            color: #afafaf;
+            font-size: 15px;
+        }
+
+        .footer__text a {
+            color: #afafaf;
+        }
+
+        .footer__content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 70px;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .footer__content a {
+            color: #8b929a;
+            text-decoration: none;
+        }
+
+        .footer__first {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-width: 320px;
+            color: #afafaf;
+            font-size: 11px;
+            margin-left: -130px;
+        }
+
+        .footer__logos {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .footer-socials {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .footer__right {
+            display: flex;
+            flex-direction: column;
+            width: 250px;
+            gap: 20px;
+            font-size: 13px;
+            inline-size: 1.5px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="header">
+    <div class="header__left">
+        <!-- ИСПРАВЛЕНО -->
+        <a href="https://store.steampowered.com/" target="_blank"><img src="resources/header_logo.png" width="176" height="44" alt="Ссылка на главную страницу Steam"></a>
+
+        <div class="header__navigation">
+            <a href="https://store.steampowered.com/" target="_blank"><span>МАГАЗИН</span></a>
+            <a href="https://steamcommunity.com/" target="_blank"><span>СООБЩЕСТВО</span></a>
+            <a href="https://store.steampowered.com/about/" target="_blank"><span>ИНФОРМАЦИЯ</span></a>
+            <a href="https://help.steampowered.com/ru/" target="_blank"><span>ПОДДЕРЖКА</span></a>
+        </div>
+    </div>
+
+    <div class="downloand__button">
+        <!-- ИСПРАВЛЕНО -->
+        <img src="resources/btn_header_installsteam_download.png">
+        <a href="https://store.steampowered.com/about/" target="_blank">Установить Steam</a>
+    </div>
+    <div class="header__menu">
+        <a href="https://steamcommunity.com/login/home/?goto=login%3Fl%3Drussian" target="_blank">вход</a>
+        <span>|</span>
+        <span>язык ▼</span>
+    </div>
+</div>
+
+<div class="login__selection">
+    <h1>Вход</h1>
+</div>
+
+<div class="login__card">
+    <div>
+        <div>
+            <span style="color: #1999ff; font-size: 12px;">ВОЙДИТЕ, ИСПОЛЬЗУЯ ИМЯ АККАУНТА</span>
+            <input type="text" value>
+        </div>
+        <div>
+            <span style="font-size: 12px;">ПАРОЛЬ</span>
+            <input type="password" value>
+        </div>
+        <div tabindex="0" role="checkbox" aria-checked="false">
+            <span style="font-size: 12px;">Запомнить меня</span>
+        </div>
+        <div>
+            <button style="font-size: 16px;">Войти</button>
+        </div>
+        <div>
+            <a class="help-link" href="https://help.steampowered.com/ru/wizard/HelpWithLogin?redir=https%3A%2F%2Fsteamcommunity.com%2Flogin%3Fl%3Drussian" target="_blank">Помогите, я не могу войти в аккаунт</a>
+        </div>
+    </div>
+    <div>
+        <div>
+            <span style="color: #1999ff; font-size: 12px;">ИЛИ QR-КОД</span>
+            <div class="qr__box">
+                <!-- ИСПРАВЛЕНО -->
+                <img alt src="resources/c0b4f2234f79cff938007055e7b6329e.svg">
+            </div>
+            <div class="qr__text">
+                Используйте
+                <a href="https://store.steampowered.com/mobile">мобильное приложение Steam</a>
+                , чтобы войти с помощью QR-кода
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footer__signup-banner">
+        <div>
+            <h3>Первый раз в Steam?</h3>
+            <button style="font-size: 15px;">Создать аккаунт</button>
+        </div>
+        <div class="footer__text">
+            <p>Это бесплатно и просто. Откройте для себя тысячи игр, в которые можно играть с миллионами новых друзей.</p>
+            <a href="https://store.steampowered.com/about">Узнайте больше о Steam</a>
+        </div>
+    </div>
+    <div class="footer__content">
+        <div class="footer__first">
+            <div class="footer__logos">
+                <!-- ИСПРАВЛЕНО -->
+                <a href="https://store.steampowered.com/"><img src="resources/logo_steam.svg" width="142" height="40" viewBox="0 0 1 42 34" fill="currentColor"></a>
+
+                <!-- ИСПРАВЛЕНО -->
+                <a href="https://www.valvesoftware.com/ru/"><img src="resources/footerLogo_valve_new.png" width="95" height="27" viewBox="0 0 95 27" fill="currentColor"></a>
+            </div>
+
+            <div>
+                <p>
+                    © 2026 Valve Corporation. Все права сохранены. Все торговые марки являются собственностью соответствующих владельцев в США и других странах.
+                    <br>
+                    Все цены указаны с учётом НДС (если применимо).
+                </p>
+            </div>
+            <div class="footer-socials">
+                <a href="https://www.youtube.com/@Steam" target="_blank" style="color: #afafaf;"><svg width="30" height="22" viewBox="0 0 30 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M11.9318 6.84835V15.7121L19.7727 11.2801L11.9318 6.84835ZM29.3731 18.5011C29.028 19.7918 28.0114 20.8083 26.7208 21.1533C24.3813 21.7803 14.9999 21.7803 14.9999 21.7803C14.9999 21.7803 5.61873 21.7803 3.27924 21.1533C1.98856 20.8083 0.971973 19.7918 0.626931 18.5011C0 16.1616 0 11.2802 0 11.2802C0 11.2802 0 6.3991 0.626931 4.05945C0.971973 2.76859 1.98843 1.7522 3.27924 1.40697C5.61873 0.780272 14.9999 0.780273 14.9999 0.780273C14.9999 0.780273 24.3813 0.780272 26.7208 1.40697C28.0114 1.7522 29.028 2.76859 29.3731 4.05945C30 6.3991 30 11.2803 30 11.2803C30 11.2803 30 16.1616 29.3731 18.5011Z"></path></svg></a>
+
+                <a href="https://bsky.app/profile/steampowered.com" target="_blank" style="color: #afafaf;"><svg width="24" height="22" viewBox="0 0 24 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5.20232 2.04977C7.95386 4.13518 10.9135 8.36354 12.0001 10.6327C13.0868 8.3637 16.0462 4.13514 18.7978 2.04977C20.7832 0.545013 24 -0.619279 24 3.08556C24 3.82547 23.5798 9.30116 23.3333 10.1901C22.4767 13.2807 19.355 14.069 16.5782 13.5919C21.432 14.4259 22.6667 17.1884 20.0001 19.9508C14.9357 25.1972 12.7211 18.6345 12.1534 16.9528C12.0494 16.6446 12.0007 16.5003 12 16.623C11.9993 16.5003 11.9506 16.6446 11.8466 16.9528C11.2791 18.6345 9.06454 25.1974 3.99987 19.9508C1.33323 17.1884 2.56794 14.4257 7.42179 13.5919C4.64492 14.069 1.5232 13.2807 0.666658 10.1901C0.420196 9.30108 0 3.82538 0 3.08556C0 -0.619279 3.21689 0.545013 5.20218 2.04977H5.20232Z"></path></svg></a>
+
+                <a href="https://facebook.com/steam" target="_blank" style="color: #afafaf;"><svg width="22" height="22" viewBox="0 0 22 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10.9998 0C4.92482 0 0 4.94301 0 11.0404C0 16.2179 3.55161 20.5625 8.34267 21.7558V14.4144H6.07452V11.0404H8.34267V9.58661C8.34267 5.82889 10.0371 4.08716 13.7128 4.08716C14.4097 4.08716 15.6122 4.2245 16.1041 4.3614V7.4196C15.8445 7.39221 15.3935 7.37853 14.8334 7.37853C13.0299 7.37853 12.333 8.06435 12.333 9.84716V11.0404H15.9259L15.3086 14.4144H12.333V22C17.7796 21.3398 22 16.6851 22 11.0404C21.9996 4.94301 17.0747 0 10.9998 0Z"></path></svg></a>
+
+                <a href="https://twitter.com/steam" target="_blank" style="color: #afafaf;"><svg width="20" height="22" viewBox="0 0 20 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M11.9027 9.45261L19.3482 0.560547H17.5838L11.119 8.2814L5.95547 0.560547H0L7.8082 12.2358L0 21.5605H1.76443L8.59152 13.4071L14.0445 21.5605H20L11.9023 9.45261H11.9027ZM9.48608 12.3387L8.69495 11.1761L2.40018 1.92521H5.11025L10.1902 9.39099L10.9813 10.5536L17.5847 20.2579H14.8746L9.48608 12.3392V12.3387Z"></path></svg></a>
+            </div>
+        </div>
+
+        <div class="footer__right">
+            <h5 style="color: #afafaf; font-size: 13px;">STEAM</h5>
+            <a href="https://store.steampowered.com/about/" target="_blank">О Steam</a>
+            <a href="https://store.steampowered.com/subscriber_agreement/" target="_blank">Соглашение подписчика Steam</a>
+            <a href="https://partner.steamgames.com/" target="_blank">Steamworks</a>
+            <a href="https://partner.steamgames.com/steamdirect" target="_blank">Распространение в Steam</a>
+            <a href="https://store.steampowered.com/digitalgiftcards/" target="_blank">Подарочные карты</a>
+        </div>
+
+        <div class="footer__right">
+            <h5 style="color: #afafaf; font-size: 13px;">VALVE</h5>
+            <a href="https://www.valvesoftware.com/ru/about" target="_blank">О Valve</a>
+            <a href="https://www.valvesoftware.com/ru/" target="_blank">Вакансии</a>
+            <a href="https://store.steampowered.com/hardware/" target="_blank">Оборудование</a>
+            <a href="https://store.steampowered.com/" target="_blank">Переработка</a>
+        </div>
+
+        <div class="footer__right">
+            <h5 style="color: #afafaf; font-size: 13px;">ПРАВОВАЯ ИНФОРМАЦИЯ</h5>
+            <a href="https://store.steampowered.com/privacy_agreement/" target="_blank">Конфиденциальность</a>
+            <a href="https://help.steampowered.com/ru/faqs/view/10BB-D27A-6378-4436" target="_blank">Доступность</a>
+            <a href="https://store.steampowered.com/legal/" target="_blank">Положения и политика</a>
+            <a href="https://store.steampowered.com/account/cookiepreferences/" target="_blank">Файлы cookie</a>
+            <a href="https://store.steampowered.com/steam_refunds/" target="_blank">Возврат средств</a>
+        </div>
+
+        <div class="footer__right">
+            <h5 style="color: #afafaf; font-size: 13px;">ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h5>
+            <a href="https://store.steampowered.com/about/" target="_blank">Установить Steam</a>
+            <a href="https://store.steampowered.com/mobile/" target="_blank">Установить мобильные приложения</a>
+            <a href="https://help.steampowered.com/ru/" target="_blank">Поддержка</a>
+            <a href="https://store.steampowered.com/login/?redir=account%2F%3Fsnr%3D2_44_44_&redir_ssl=1&snr=2_44_44_" target="_blank">Мой аккаунт</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

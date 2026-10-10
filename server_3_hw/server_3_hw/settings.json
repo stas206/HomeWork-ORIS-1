@@ -1,0 +1,15 @@
+﻿{
+  "Server": {
+    "Host": "127.0.0.1",
+    "Port": 8888,
+    "Path": ""
+  },
+  "AllowedSites": ["bonx", "satisfactory-wiki", "search", "steam"],
+  "Folders": {
+    "SitesFolder": "sites",
+    "HtmlFolder": "html"
+  },
+  "Controllers": {
+    "Enabled": true
+  }
+}

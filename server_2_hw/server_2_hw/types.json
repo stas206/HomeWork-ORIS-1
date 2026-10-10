@@ -1,0 +1,15 @@
+﻿{
+  ".html": "text/html",
+  ".jpg": "image/jpeg",
+  ".css": "text/css",
+  ".js": "text/javascript",
+  ".png": "image/png",
+  ".webp": "image/webp",
+  ".svg": "image/svg+xml",
+  ".pdf": "application/pdf",
+  ".json": "application/json",
+  ".otf": "font/otf",
+  ".ttf": "font/ttf",
+  ".woff": "font/woff",
+  ".woff2": "font/woff2"
+}
