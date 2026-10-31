@@ -1,0 +1,14 @@
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\bin\Debug\net10.0\OrdersApp.exe
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\bin\Debug\net10.0\OrdersApp.deps.json
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\bin\Debug\net10.0\OrdersApp.runtimeconfig.json
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\bin\Debug\net10.0\OrdersApp.dll
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\bin\Debug\net10.0\OrdersApp.pdb
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\obj\Debug\net10.0\OrdersApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\obj\Debug\net10.0\OrdersApp.AssemblyInfoInputs.cache
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\obj\Debug\net10.0\OrdersApp.AssemblyInfo.cs
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\obj\Debug\net10.0\OrdersApp.csproj.CoreCompileInputs.cache
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\obj\Debug\net10.0\OrdersApp.dll
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\obj\Debug\net10.0\refint\OrdersApp.dll
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\obj\Debug\net10.0\OrdersApp.pdb
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\obj\Debug\net10.0\OrdersApp.genruntimeconfig.cache
+C:\Users\user\RiderProjects\kontrolnay\OrdersApp\obj\Debug\net10.0\ref\OrdersApp.dll
