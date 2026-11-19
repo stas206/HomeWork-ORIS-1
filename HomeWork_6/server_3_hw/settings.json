@@ -1,0 +1,15 @@
+﻿{
+  "Server": { "Host": "127.0.0.1", "Port": 8888, "Path": "" },
+  "AllowedSites": [ "SearcherFinder", "Satisfactory", "Steam" ],
+  "Folders": { "StaticFolder": "static" },
+  "Email": {
+    "Mode": "Smtp",
+    "OutputFolder": "emails",
+    "Host": "smtp.mail.ru",
+    "Port": 587,
+    "From": "iuoris@mail.ru",
+    "UseSsl": true,
+    "UserName": "iuoris@mail.ru",
+    "Password": "vIBZuKXTTWLIKEm3e9fU"
+  }
+}

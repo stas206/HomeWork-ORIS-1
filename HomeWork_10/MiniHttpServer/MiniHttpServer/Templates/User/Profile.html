@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>${Title}</title>
+    <style>
+        body { font-family: "Segoe UI", Arial, sans-serif; margin: 32px; color: #222; }
+        h1 { color: #2c3e50; }
+        .card { border: 1px solid #ddd; border-radius: 8px; padding: 20px; max-width: 520px; background: #fafafa; }
+        .field { margin: 6px 0; }
+        .field strong { display: inline-block; min-width: 110px; color: #555; }
+        .badge-active { color: #2e7d32; font-weight: bold; }
+        .badge-inactive { color: #c62828; font-weight: bold; }
+        .bio { margin-top: 14px; padding: 10px; background: #fff; border-left: 4px solid #2c3e50; }
+        nav a { margin-right: 14px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/user/profile">Профиль</a>
+        <a href="/user/list">Список пользователей</a>
+    </nav>
+
+    <h1>${Title}</h1>
+
+    <div class="card">
+        <div class="field"><strong>Имя:</strong> ${User.Name}</div>
+        <div class="field"><strong>Возраст:</strong> ${User.Age}</div>
+        <div class="field"><strong>Email:</strong> ${User.Email}</div>
+
+        <div class="field">
+            <strong>Статус:</strong>
+$if(User.IsActive)
+            <span class="badge-active">активен</span>
+$else
+            <span class="badge-inactive">неактивен</span>
+$endif
+        </div>
+
+        <div class="field">
+            <strong>Подписка:</strong>
+$if(HasSubscription)
+            оформлена
+$else
+            отсутствует
+$endif
+        </div>
+
+        <div class="bio">${Bio}</div>
+    </div>
+</body>
+</html>

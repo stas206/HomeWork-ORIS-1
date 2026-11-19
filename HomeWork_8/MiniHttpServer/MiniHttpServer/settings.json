@@ -1,0 +1,15 @@
+{
+  "Server": { "Host": "127.0.0.1", "Port": 8888, "Path": "" },
+  "AllowedSites": [ "SearcherFinder", "Satisfactory", "Steam" ],
+  "Folders": { "StaticFolder": "static" },
+  "Email": {
+    "Mode": "File",
+    "OutputFolder": "emails",
+    "Host": "smtp.mail.ru",
+    "Port": 587,
+    "From": "no-reply@example.com",
+    "UseSsl": true,
+    "UserName": "",
+    "Password": ""
+  }
+}

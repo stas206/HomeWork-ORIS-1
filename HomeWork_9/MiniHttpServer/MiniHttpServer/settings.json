@@ -1,0 +1,16 @@
+{
+  "Server": { "Host": "127.0.0.1", "Port": 8888, "Path": "" },
+  "AllowedSites": [ "SearcherFinder", "Satisfactory", "Steam" ],
+  "Folders": { "StaticFolder": "static" },
+  "ConnectionString": "Host=localhost;Port=5432;Database=orisdb;Username=postgres;Password=1234;",
+  "Email": {
+    "Mode": "File",
+    "OutputFolder": "emails",
+    "Host": "smtp.mail.ru",
+    "Port": 587,
+    "From": "no-reply@example.com",
+    "UseSsl": true,
+    "UserName": "",
+    "Password": ""
+  }
+}

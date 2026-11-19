@@ -1,0 +1,41 @@
+﻿using System.Text.Json;
+
+namespace MiniHttpServer.Framework.Content;
+
+public sealed class MimeTypeProvider
+{
+    private readonly Dictionary<string, string> _types = new(StringComparer.OrdinalIgnoreCase)
+    {
+        [".html"] = "text/html; charset=utf-8", [".htm"] = "text/html; charset=utf-8",
+        [".css"] = "text/css; charset=utf-8", [".js"] = "text/javascript; charset=utf-8",
+        [".json"] = "application/json; charset=utf-8", [".txt"] = "text/plain; charset=utf-8",
+        [".xml"] = "application/xml; charset=utf-8", [".png"] = "image/png",
+        [".jpg"] = "image/jpeg", [".jpeg"] = "image/jpeg", [".gif"] = "image/gif",
+        [".svg"] = "image/svg+xml", [".ico"] = "image/x-icon", [".webp"] = "image/webp",
+        [".pdf"] = "application/pdf", [".woff"] = "font/woff", [".woff2"] = "font/woff2",
+        [".ttf"] = "font/ttf", [".otf"] = "font/otf", [".mp4"] = "video/mp4",
+        [".mp3"] = "audio/mpeg", [".zip"] = "application/zip"
+    };
+
+    public MimeTypeProvider()
+    {
+        var path = Path.Combine(AppContext.BaseDirectory, "types.json");
+        if (!File.Exists(path)) return;
+        try
+        {
+            var extra = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(path));
+            if (extra != null)
+                foreach (var pair in extra) _types[pair.Key] = pair.Value;
+        }
+        catch (JsonException ex)
+        {
+            Console.WriteLine($"Ошибка чтения types.json: {ex.Message}");
+        }
+    }
+
+    public string GetMimeType(string filePath)
+    {
+        var extension = Path.GetExtension(filePath);
+        return _types.TryGetValue(extension, out var type) ? type : "application/octet-stream";
+    }
+}
